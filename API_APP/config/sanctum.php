@@ -21,6 +21,10 @@ return [
         Sanctum::currentApplicationUrlWithPort()
     ))),
 
+    // Prefix for tokens
+    'token_prefix' => env('SANCTUM_TOKEN_PREFIX', ''),
+    'token_length' => env('SANCTUM_TOKEN_LENGTH', 32),
+
     /*
     |--------------------------------------------------------------------------
     | Sanctum Guards
