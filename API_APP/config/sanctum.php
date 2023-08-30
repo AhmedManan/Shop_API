@@ -50,7 +50,8 @@ return [
     |
     */
 
-    'expiration' => null,
+    // 'expiration' => null,
+    'expiration' => 43800, //token will expire after 30 days
 
     /*
     |--------------------------------------------------------------------------
