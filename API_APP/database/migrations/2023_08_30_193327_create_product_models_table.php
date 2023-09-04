@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('category')->default('uncategorized');
             $table->string('price');
             $table->integer('quantity');
+            $table->string('product_pic');
             $table->unsignedBigInteger('seller_id');
             $table->foreign('seller_id')
                 ->references('id')

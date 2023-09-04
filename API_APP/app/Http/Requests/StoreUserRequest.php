@@ -3,7 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use App\Rules\Password;
+use App\Rules\password;
 
 class StoreUserRequest extends FormRequest
 {
