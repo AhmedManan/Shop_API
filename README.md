@@ -8,7 +8,7 @@ The API is available at `https://shop-api.ahmedmanan.com`
 
 - [Endpoints](#endpoints)
   - [Status](#status)
-  - [List of Books](#list-of-books)
+  - [List of Products](#list-of-products)
   - [Get a Single Book](#get-a-single-book)
   - [Submit an Order](#submit-an-order)
   - [Get All Orders](#get-all-orders)
@@ -26,11 +26,11 @@ GET `/status`
 
 Returns the status of the API.
 
-### List of books ###
+### List of Products ###
 
-GET `/books`
+GET `/products`
 
-Returns a list of books.
+Returns a list of products.
 
 Optional query parameters:
 
