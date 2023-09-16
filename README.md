@@ -4,6 +4,20 @@ This API allows you to reserve a book.
 
 The API is available at `https://shop-api.ahmedmanan.com`
 
+## Table of Contents
+
+- [Endpoints](#endpoints)
+  - [Status](#status)
+  - [List of Books](#list-of-books)
+  - [Get a Single Book](#get-a-single-book)
+  - [Submit an Order](#submit-an-order)
+  - [Get All Orders](#get-all-orders)
+  - [Get an Order](#get-an-order)
+  - [Update an Order](#update-an-order)
+  - [Delete an Order](#delete-an-order)
+- [API Authentication](#api-authentication)
+- [Possible Errors](#possible-errors)
+
 ## Endpoints ##
 
 ### Status ###
