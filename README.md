@@ -1,4 +1,4 @@
-# Simple Books API #
+# Simple Shop API #
 
 This is a sample Shop API documentation.
 
@@ -157,7 +157,7 @@ The request body needs to be in **x-www-form-urlencoded** or **JSON** format and
             "created_at": "2023-09-16T21:00:39.000000Z",
             "id": 2
         },
-        "token": "3|WK2hKihNb5ui3zJyWXNLMgbYK75cSKFEIRUsp0wfc0943af5"
+        "token": "WK2hKihNb5ui3zJyWXNLMgbYK75cSKFEIRUsp0wfc0943af5"
     }
 }
  ```
@@ -190,7 +190,7 @@ The request body needs to be in **form-data** format and include the following p
             "created_at": "2023-08-31T15:29:54.000000Z",
             "updated_at": "2023-08-31T15:29:54.000000Z"
         },
-        "token": "5|mxZrR8gSMB7XZYqMYCnV07PdVqnuQsVoKarCG5v5ef1c0edc"
+        "token": "mxZrR8gSMB7XZYqMYCnV07PdVqnuQsVoKarCG5v5ef1c0edc"
     }
   }
  ```
