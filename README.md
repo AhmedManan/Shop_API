@@ -1,60 +1,43 @@
 # Simple Books API #
 
-This API allows you to reserve a book.
+This is a sample Shop API documentation.
 
 The API is available at `https://shop-api.ahmedmanan.com`
 
 ## Table of Contents
 
 - [Endpoints](#endpoints)
-  - [Status](#status)
+  - [Base URL](#base-url)
+  - [Create a Product](#create-a-product)
   - [List of Products](#list-of-products)
-  - [Get a Single Book](#get-a-single-book)
-  - [Submit an Order](#submit-an-order)
+  - [Get a Single Product](#get-a-single-product)
+  - [Update a Product](#update-a-product)
+  - [Delete a Product](#delete-a-product)
   - [Get All Orders](#get-all-orders)
   - [Get an Order](#get-an-order)
-  - [Update an Order](#update-an-order)
-  - [Delete an Order](#delete-an-order)
 - [API Authentication](#api-authentication)
+  - [Register](#register)
+  - [Login](#login)
 - [Possible Errors](#possible-errors)
 
 ## Endpoints ##
 
-### Status ###
+### Base URL ###
 
-GET `/status`
+URL: `https://shop-api.ahmedmanan.com`
 
 Returns the status of the API.
 
-### List of Products ###
+### Create a Product ###
 
-GET `/products`
+POST `/products`
 
-Returns a list of products.
-
-Optional query parameters:
-
-- type: fiction or non-fiction
-- limit: a number between 1 and 20.
-
-
-### Get a single book ###
-
-GET `/books/:bookId`
-
-Retrieve detailed information about a book.
-
-
-### Submit an order ###
-
-POST `/orders`
-
-Allows you to submit a new order. Requires authentication.
+Allows you to create a new product. Requires authentication.
 
 The request body needs to be in JSON format and include the following properties:
 
- - `bookId` - Integer - Required
- - `customerName` - String - Required
+ - `productId` - Integer - Required *
+ - `Product Name` - String - Required *
 
 Example
 ```
@@ -69,23 +52,29 @@ Authorization: Bearer <YOUR TOKEN>
 
 The response body will contain the order Id.
 
-### Get all orders ###
+### List of Products ###
 
-GET `/orders`
+GET `/products`
 
-Allows you to view all orders. Requires authentication.
+Returns a list of products.
 
-### Get an order ###
+Optional query parameters:
 
-GET `/orders/:orderId`
+- type: fiction or non-fiction
+- limit: a number between 1 and 20.
 
-Allows you to view an existing order. Requires authentication.
 
-### Update an order ###
+### Get a single Product ###
 
-PATCH `/orders/:orderId`
+GET `/products/:productId`
 
-Update an existing order. Requires authentication.
+Retrieve detailed information about a product.
+
+### Update a Product ###
+
+PUT `/products/:productId`
+
+Update an existing product. Requires authentication.
 
 The request body needs to be in JSON format and allows you to update the following properties:
 
@@ -101,11 +90,11 @@ Authorization: Bearer <YOUR TOKEN>
 }
 ```
 
-### Delete an order ###
+### Delete a Product ###
 
-DELETE `/orders/:orderId`
+DELETE `/Products/:productId`
 
-Delete an existing order. Requires authentication.
+Delete an existing product. Requires authentication.
 
 The request body needs to be empty.
 
@@ -115,28 +104,99 @@ DELETE /orders/PF6MflPDcuhWobZcgmJy5
 Authorization: Bearer <YOUR TOKEN>
 ```
 
+### Get all orders ###
+
+GET `/orders`
+
+Allows you to view all orders. Requires authentication.
+
+### Get an order ###
+
+GET `/orders/:orderId`
+
+Allows you to view an existing order. Requires authentication.
+
+
 ## API Authentication ##
 
-To submit or view an order, you need to register your API client.
+### Register ###
 
-POST `/api-clients/`
+To create or view a product, you need to register your API client.
 
-The request body needs to be in JSON format and include the following properties:
+POST `/register/`
 
- - `clientName` - String
- - `clientEmail` - String
+The request body needs to be in **x-www-form-urlencoded** or **JSON** format and include the following properties:
 
- Example
+ - `name` - String
+ - `email` - String
+ - `password` - String
+ - `password_confirmation` - String
+
+ **Example Request**
 
  ```
  {
-    "clientName": "Postman",
-    "clientEmail": "valentin@example.com"
+  "name": "Your Name",
+  "email": "your.email@gmail.com",
+  "password": "password",
+  "password_confirmation": "password"
 }
  ```
 
-The response body will contain the access token. The access token is valid for 7 days.
+ **Response**
 
-**Possible errors**
+ ```
+{
+    "status": "Request succesful",
+    "message": null,
+    "data": {
+        "user": {
+            "name": "Your Name",
+            "email": "your.email@gmail.com",
+            "updated_at": "2023-09-16T21:00:39.000000Z",
+            "created_at": "2023-09-16T21:00:39.000000Z",
+            "id": 2
+        },
+        "token": "3|WK2hKihNb5ui3zJyWXNLMgbYK75cSKFEIRUsp0wfc0943af5"
+    }
+}
+ ```
+
+The response body will contain the access token. The access token is valid for 30 days.
+
+### Login ###
+
+If you are a registered client, you need to login to create or view a product.
+
+POST `/login/`
+
+The request body needs to be in **form-data** format and include the following properties:
+
+ - `email` - String
+ - `password` - String
+
+  **Response**
+
+ ```
+  {
+    "status": "Request succesful",
+    "message": null,
+    "data": {
+        "user": {
+            "id": 1,
+            "name": "your name",
+            "email": "your.email@gmail.com",
+            "email_verified_at": null,
+            "created_at": "2023-08-31T15:29:54.000000Z",
+            "updated_at": "2023-08-31T15:29:54.000000Z"
+        },
+        "token": "5|mxZrR8gSMB7XZYqMYCnV07PdVqnuQsVoKarCG5v5ef1c0edc"
+    }
+  }
+ ```
+
+  
+
+## Possible errors ##
 
 Status code 409 - "API client already registered." Try changing the values for `clientEmail` and `clientName` to something else.
