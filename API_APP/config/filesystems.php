@@ -56,6 +56,11 @@ return [
             'throw' => false,
         ],
 
+        'secure_storage' => [
+            'driver' => 'local',
+            'root' => storage_path('File_Storage'), // Verify that this path is correct
+        ],        
+
     ],
 
     /*

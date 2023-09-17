@@ -77,13 +77,15 @@
             white-space: pre-wrap;
             font-family: 'Courier New', Courier, monospace;
         }
-                /* Style x-www-form-urlencoded parameters */
-                .form-data-table {
+
+        /* Style x-www-form-urlencoded parameters */
+        .form-data-table {
             width: 100%;
             border-collapse: collapse;
         }
 
-        .form-data-table th, .form-data-table td {
+        .form-data-table th,
+        .form-data-table td {
             padding: 10px;
             border: 1px solid #ccc;
             text-align: left;
@@ -198,8 +200,8 @@
                 <button class="copy-button" onclick="copyToClipboard('api-url')">Copy</button>
             </div>
 
-                        <!-- x-www-form-urlencoded Parameters section -->
-                        <h3>x-www-form-urlencoded Parameters</h3>
+            <!-- x-www-form-urlencoded Parameters section -->
+            <h3>x-www-form-urlencoded Parameters</h3>
             <table class="form-data-table">
                 <thead>
                     <tr>

@@ -19,14 +19,15 @@ class StoreProductRequest extends FormRequest
      *
      * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array|string>
      */
-    public function rules(): array
+    public function rules()
     {
         return [
-            'name' => ['required', 'max:255'],
-            'description' => ['required'],
-            'category' => ['required'],
-            'price' => ['required'],
-            'quantity' => ['required']
+            'name' => ['required','string','min:3','max:255'],
+            'description' => 'required|string|min:10|max:1024',
+            'category' => ['required','string'],
+            'quantity' => ['required','integer','min:1'],
+            'price' => ['required','numeric','min:0'],
+            'product_pic' => ['required','image','mimes:jpeg,png,jpg'],
         ];
     }
 }
