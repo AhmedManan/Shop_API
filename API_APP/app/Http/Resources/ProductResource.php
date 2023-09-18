@@ -27,8 +27,8 @@ class ProductResource extends JsonResource
                 'created_at' => $this->created_at // Fix this line to use created_at
             ],
             'relationships' => [
-                'id' => $this->user->id,
-                'name' => $this->user->name
+                'seller_id' => $this->user->id,
+                'seller' => $this->user->name
             ]
         ];
     }

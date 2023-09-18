@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\TaskController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\OrderController;
 
 /*
 |--------------------------------------------------------------------------
@@ -34,5 +35,6 @@ Route::group(['middleware'=>['auth:sanctum']], function(){
     Route::post('/logout', [AuthController::class,'logout']);
     Route::resource('/tasks', TaskController::class);
     Route::resource('/products', ProductController::class);
+    Route::resource('/orders', OrderController::class);
 
 });

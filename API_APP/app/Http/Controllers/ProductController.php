@@ -50,4 +50,31 @@ class ProductController extends Controller
 
         return new ProductResource($product);
     }
+
+    public function show(ProductModel $product)
+    {
+        // tarnary operator: if not outhorize show the not_authorized function else show the product
+        return $this->is_not_authorized($product) ? $this->is_not_authorized($product) : new ProductResource($product);
+    }
+
+    public function update(Request $request, ProductModel $product)
+    {
+        $this->is_not_authorized($product) ? $this->is_not_authorized($product) : $product->update($request->all());
+        return new ProductResource($product);
+    }
+
+    public function destroy(ProductModel $product)
+    {
+        $this->is_not_authorized($product) ? $this->is_not_authorized($product) : $product->delete();
+
+        return response(null, 204);
+    }
+
+
+    private function is_not_authorized($product)
+    {
+        if (Auth::user()->id != $product->seller_id) {
+            return $this->error("", 'you are not authorized for this request', 403);
+        }
+    }
 }
