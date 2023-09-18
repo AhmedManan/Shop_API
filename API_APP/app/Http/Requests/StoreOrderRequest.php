@@ -35,8 +35,8 @@ class StoreOrderRequest extends FormRequest
             'order_status' => ['required', 'max:255'],
             'order_notes' => ['required'],
             'priority' => ['required'],
-            'seller_id' => ['required'],
-            'seller_name' => ['required'],
+            // 'seller_id' => ['required'],
+            // 'seller_name' => ['required'],
         ];
     }
 }
