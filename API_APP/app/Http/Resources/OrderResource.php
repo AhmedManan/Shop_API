@@ -17,10 +17,10 @@ class OrderResource extends JsonResource
         return [
             'id' => (string) $this->id,
             'order' => [
-                'order_price' => $this->price,
-                'order_status' => $this->status,
-                'order_notes' => $this->notes,
-                'priority' => $this->priority,
+                'order_price' => $this->order_price,
+                'order_status' => $this->order_status,
+                'order_notes' => $this->order_notes,
+                'order_priority' => $this->order_priority,
             ],
             'buyer' => [
                 'buyer_id' => $this->user->id,
@@ -31,6 +31,7 @@ class OrderResource extends JsonResource
             'billing' => [
                 'billing_type' => $this->billing_type,
                 'billing_status' => $this->billing_status,
+                'discount' => $this->discount,
             ],
             'product' => [
                 'product_id' => $this->product_id,
@@ -40,7 +41,11 @@ class OrderResource extends JsonResource
             'seller' => [
                 'seller_id' => $this->seller_id,
                 'seller' => $this->seller_name,
-            ]
+            ],
+            'date' => [
+                'created_at' => $this->created_at,
+                'updated_at' => $this->updated_at,
+            ],
         ];
     }
 }

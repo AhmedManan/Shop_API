@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class StoreOrderRequest extends FormRequest
 {
@@ -29,12 +30,13 @@ class StoreOrderRequest extends FormRequest
             'buyer_name' => ['required', 'max:255'],
             'buyer_mobileno' => ['required', 'max:255'],
             'buyer_address' => ['required', 'max:255'],
-            'billing_status' => ['required', 'max:255'],
-            'billing_type' => ['required', 'max:255'],
-            'order_price' => ['required', 'max:255'],
-            'order_status' => ['required', 'max:255'],
+            'billing_status' => ['required', 'max:255', Rule::in(['pending', 'partial', 'paid', 'canceled'])],
+            'billing_type' => ['required', 'max:255', Rule::in(['OnDelivery', 'Card', 'Online', 'GiftCard'])],
+            'discount' => ['nullable'],
+            // 'order_price' => ['required', 'max:255'],
+            'order_status' => ['nullable', 'max:255', Rule::in(['initial', 'processing', 'received', 'delivered', 'canceled'])],
             'order_notes' => ['required'],
-            'priority' => ['required'],
+            'order_priority' => ['nullable'],
             // 'seller_id' => ['required'],
             // 'seller_name' => ['required'],
         ];

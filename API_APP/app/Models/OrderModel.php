@@ -22,10 +22,11 @@ class OrderModel extends Model
         'buyer_address',
         'billing_status',
         'billing_type',
+        'discount',
         'order_price',
         'order_status',
         'order_notes',
-        'priority',
+        'order_priority',
         'seller_id',
         'seller_name',
     ];
@@ -39,7 +40,7 @@ class OrderModel extends Model
     }
 
     // The buyer of the order
-    public function buyer()
+    public function user()
     {
         return $this->belongsTo(User::class, 'buyer_id');
     }
