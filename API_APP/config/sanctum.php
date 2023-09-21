@@ -22,7 +22,7 @@ return [
     ))),
 
     // Prefix for tokens
-    'token_prefix' => env('SANCTUM_TOKEN_PREFIX', ''),
+    'token_prefix' => env('SANCTUM_TOKEN_PREFIX', 'tkn_'),
     'token_length' => env('SANCTUM_TOKEN_LENGTH', 32),
 
     /*

@@ -24,7 +24,12 @@ class AuthController extends Controller
         $user = User::where('email', $request->email)->first();
 
         // Generate an API token using Sanctum
+        // $token = $user->createToken('token_' . $user->email)->plainTextToken;
+        // Generate an API token using Sanctum updated for removing serial number before token
         $token = $user->createToken('token_' . $user->email)->plainTextToken;
+
+        // Extract only the part after "tkn_" in the token
+        $token = substr($token, strpos($token, 'tkn_') + 0);
 
         // Create a user array without the "email_verified_at" field if it's null
         $userData = [
@@ -39,6 +44,7 @@ class AuthController extends Controller
         if ($user->email_verified_at === null) {
             unset($userData['email_verified_at']);
         }
+        
 
         return $this->success([
             'user' => $userData,
@@ -52,6 +58,15 @@ class AuthController extends Controller
     {
         $validatedData = $request->validated();
 
+        // Extract the domain from the email address
+        $email = $validatedData['email'];
+        $domain = substr(strrchr($email, "@"), 1);
+
+        // Check MX records for the domain
+        if (!checkdnsrr($domain, "MX")) {
+            return $this->error('', "Invalid email domain", 400);
+        }
+
         $user = User::create([
             'name' => $validatedData['name'],
             'email' => $validatedData['email'],
@@ -60,6 +75,9 @@ class AuthController extends Controller
 
         // Generate an API token using Sanctum
         $token = $user->createToken('token_' . $user->email)->plainTextToken;
+
+        // Extract only the part after "tkn_" in the token
+        $token = substr($token, strpos($token, 'tkn_') + 0);
 
         return $this->success([
             'user' => $user,
