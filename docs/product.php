@@ -8,7 +8,7 @@
     </div>
     <!-- Request section -->
     <h4>Request</h4>
-    <p>The request body needs to contain authentication 'token' to perform the request.</p>
+    <p>The request needs to contain authentication 'token' to view products details.</p>
     <!-- Request body content -->
     <strong>header:</strong> <br><br>
     <table class="form-data-table">
@@ -79,7 +79,7 @@
     </div>
     <!-- Request section -->
     <h4>Request</h4>
-    <p>The request body needs to contain authentication 'token' to perform the request.</p>
+    <p>The request needs to contain authentication 'token' to view a product.</p>
     <!-- Request body content -->
     <strong>header:</strong> <br><br>
     <table class="form-data-table">
@@ -210,7 +210,6 @@
     </div>
     <!-- Request section -->
     <h4>Request</h4>
-    <p>The request body needs to contain authentication 'token' to perform logout.</p>
     <!-- Request body content -->
     <strong>head:</strong> <br><br>
     <table class="form-data-table">
@@ -228,6 +227,7 @@
         </tbody>
     </table><br><br>
     <strong>body:</strong> x-www-form-urlencoded <br><br>
+    <p>The request body needs to be in x-www-form-urlencoded format and include the following properties:</p>
     <table class="form-data-table">
         <thead>
             <tr>
@@ -280,5 +280,34 @@
 }</pre>
         <!-- Button to copy response body to clipboard -->
         <button class="copy-button" onclick="copyToClipboard('response-body')">Copy</button>
+    </div>
+    <h3>Delete A Product</h3>
+    <p>The request can be ececuted to perform delete of a product.</p>
+    <div class="url-code">
+        <!-- API endpoint URL -->
+        <pre id="api-url"><b>DELETE:</b> base_url/products/{id}</pre>
+    </div>
+    <!-- Request section -->
+    <h4>Request</h4>
+    <p>The request needs to contain authentication 'token' to perform Delete.</p>
+    <!-- Request body content -->
+    <strong>head:</strong> <br><br>
+    <table class="form-data-table">
+        <thead>
+            <tr>
+                <th>Key</th>
+                <th>Value</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>token</td>
+                <td><div class="variable-type">String</div></td>
+            </tr>
+        </tbody>
+    </table><br><br>
+    <h4>Response</h4>
+    <div class="code">
+        <p>Status Code: 204 No Content</p>
     </div>
 </div>
