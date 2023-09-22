@@ -45,7 +45,7 @@ class ProductController extends Controller
             'category' => request()->category,
             'quantity' => request()->quantity,
             'price' => request()->price,
-            'product_pic' => $productPicPath,
+            'product_pic' => $newFileName,
         ]);
 
         return new ProductResource($product);
@@ -77,4 +77,5 @@ class ProductController extends Controller
             return $this->error("", 'you are not authorized for this request', 403);
         }
     }
+
 }

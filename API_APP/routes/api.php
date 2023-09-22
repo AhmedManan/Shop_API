@@ -6,6 +6,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\TaskController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\PublicController;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,6 +30,10 @@ Route::resource('/tasks', TaskController::class);
 // Public Routes
 Route::post('/login', [AuthController::class,'login']);
 Route::post('/register', [AuthController::class,'register']);
+Route::get('/', [PublicController::class,'status']);
+
+
+
 
 // protected routes
 Route::group(['middleware'=>['auth:sanctum']], function(){

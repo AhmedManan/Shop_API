@@ -17,6 +17,6 @@ Route::get('/doc', function () {
     return view('doc');
 });
 
-Route::get('/', function () {
-    return json_encode("API Health OK");
-});
+// Route::get('/', function () {
+//     return json_encode("API Health OK");
+// });
