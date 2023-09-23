@@ -26,30 +26,36 @@ class ProductController extends Controller
     {
         $validatedData = $request->validated();
 
+        // Initialize the new file name as null
+        $newFileName = null;
+
         // Handle product picture upload to the public folder
         if ($request->hasFile('product_pic')) {
-            $extension = $request->file('product_pic')->getClientOriginalExtension();
+            $file = $request->file('product_pic');
+
+            // Generate a unique file name
+            $extension = $file->getClientOriginalExtension();
             $randomDigits = rand(100000, 999999);
             $newFileName = 'pdt_' . $randomDigits . '.' . $extension;
 
             // Move the uploaded file to the public product_pics folder
-            $request->file('product_pic')->move(public_path('uploads/product_pics'), $newFileName);
-        } else {
-            $newFileName = null;
+            $file->move(public_path('uploads/product_pics'), $newFileName);
         }
 
+        // Create the product with the new file name or null if no picture was uploaded
         $product = ProductModel::create([
             'seller_id' => Auth::user()->id,
-            'name' => request()->name,
-            'description' => request()->description,
-            'category' => request()->category,
-            'quantity' => request()->quantity,
-            'price' => request()->price,
+            'name' => $validatedData['name'],
+            'description' => $validatedData['description'],
+            'category' => $validatedData['category'],
+            'quantity' => $validatedData['quantity'],
+            'price' => $validatedData['price'],
             'product_pic' => $newFileName,
         ]);
 
         return new ProductResource($product);
     }
+
 
     public function show(ProductModel $product)
     {
@@ -65,9 +71,22 @@ class ProductController extends Controller
 
     public function destroy(ProductModel $product)
     {
-        $this->is_not_authorized($product) ? $this->is_not_authorized($product) : $product->delete();
+        if ($this->is_not_authorized($product)) {
+            // Handle unauthorized access here (e.g., return an error response)
+            // You can customize this based on your authorization logic.
+        } else {
+            // Delete the old product picture if it exists
+            if ($product->product_pic) {
+                $oldPath = public_path('uploads/product_pics/' . $product->product_pic);
+                if (file_exists($oldPath)) {
+                    unlink($oldPath);
+                }
+            }
 
-        return response(null, 204);
+            $product->delete();
+
+            return response(null, 204);
+        }
     }
 
 
@@ -77,7 +96,7 @@ class ProductController extends Controller
             return $this->error("", 'you are not authorized for this request', 403);
         }
     }
-    
+
     public function getProductPic($filename)
     {
         // Define the path to the public product_pics directory

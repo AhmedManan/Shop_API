@@ -13,8 +13,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/doc', function () {
-    return view('doc');
+Route::get('/docs', function () {
+    return view('index');
 });
 
 

@@ -170,13 +170,9 @@
             </div>
         </div>
         <!-- Authentication section -->
-        <?php
-        include('auth.php')
-        ?>
+        @include('auth')
         <!-- Product section -->
-        <?php
-        include('product.php')
-        ?>
+        @include('product')
     </div>
 
     <!-- JavaScript function to copy content to clipboard -->
