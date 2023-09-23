@@ -31,8 +31,12 @@ class Handler extends ExceptionHandler
     // render json for API requests
     public function render($request, Throwable $exception)
     {
+        $defined=['doc','product-pic.show'];
+        if ($request->routeIs($defined)) {
+            return parent::render($request, $exception);
+        }
 
-        if ($request->expectsJson() || $request->is('/api/*')) {
+        if ($request->expectsJson() || $request->is('*')) {
             return $this->prepareJsonResponse($request, $exception);
         }
 

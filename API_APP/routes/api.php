@@ -31,6 +31,8 @@ Route::resource('/tasks', TaskController::class);
 Route::post('/login', [AuthController::class,'login']);
 Route::post('/register', [AuthController::class,'register']);
 Route::get('/', [PublicController::class,'status']);
+Route::get('product-pics/{filename}', [ProductController::class,'getProductPic'])->name('product.pic');
+
 
 
 

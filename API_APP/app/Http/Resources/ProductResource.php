@@ -23,6 +23,7 @@ class ProductResource extends JsonResource
                 'quantity' => $this->quantity,
                 'price' => $this->price,
                 'product_pic' => $this->product_pic, // Add this line
+                'product_pic_link' => $this->product_pic ? asset('product-pics/' . $this->product_pic) : null, // New product_pic_link field
                 'updated_at' => $this->updated_at,
                 'created_at' => $this->created_at // Fix this line to use created_at
             ],

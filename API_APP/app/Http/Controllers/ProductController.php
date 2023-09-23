@@ -26,16 +26,16 @@ class ProductController extends Controller
     {
         $validatedData = $request->validated();
 
-        // Handle product picture upload
+        // Handle product picture upload to the public folder
         if ($request->hasFile('product_pic')) {
-            $originalFileName = $request->file('product_pic')->getClientOriginalName();
             $extension = $request->file('product_pic')->getClientOriginalExtension();
             $randomDigits = rand(100000, 999999);
             $newFileName = 'pdt_' . $randomDigits . '.' . $extension;
 
-            $productPicPath = Storage::disk('secure_storage')->putFileAs('product_pics', $request->file('product_pic'), $newFileName);
+            // Move the uploaded file to the public product_pics folder
+            $request->file('product_pic')->move(public_path('uploads/product_pics'), $newFileName);
         } else {
-            $productPicPath = null;
+            $newFileName = null;
         }
 
         $product = ProductModel::create([
@@ -77,5 +77,19 @@ class ProductController extends Controller
             return $this->error("", 'you are not authorized for this request', 403);
         }
     }
+    
+    public function getProductPic($filename)
+    {
+        // Define the path to the public product_pics directory
+        $path = public_path('uploads/product_pics/' . $filename);
 
+        // Check if the file exists
+        if (file_exists($path)) {
+            // Return the image with the appropriate response headers
+            return response()->file($path);
+        }
+
+        // If the file doesn't exist, return a 404 response
+        return response('Image not found', 404);
+    }
 }
