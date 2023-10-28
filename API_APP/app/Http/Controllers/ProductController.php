@@ -17,8 +17,11 @@ class ProductController extends Controller
     use HTTPResponses;
     public function index()
     {
+        // return ProductResource::collection(
+        //     ProductModel::where('seller_id', Auth::user()->id)->get()
+        // );
         return ProductResource::collection(
-            ProductModel::where('seller_id', Auth::user()->id)->get()
+             ProductModel::get()
         );
     }
 
@@ -63,11 +66,55 @@ class ProductController extends Controller
         return $this->is_not_authorized($product) ? $this->is_not_authorized($product) : new ProductResource($product);
     }
 
-    public function update(Request $request, ProductModel $product)
-    {
-        $this->is_not_authorized($product) ? $this->is_not_authorized($product) : $product->update($request->all());
-        return new ProductResource($product);
+    // public function update(Request $request, ProductModel $product)
+    // {
+    //     $this->is_not_authorized($product) ? $this->is_not_authorized($product) : $product->update($request->all());
+    //     return new ProductResource($product);
+    // }
+    public function update(Request $request, $id)
+{
+    // Validate the request data
+    $validatedData = $request->validate([
+        'price' => 'numeric', // Add more validation rules as needed
+        // Add other fields that can be updated
+    ]);
+
+    // Find the product by its ID
+    $existingProduct = ProductModel::find($id);
+
+    // If the product exists, update the single field
+    if ($existingProduct) {
+        // Check if the 'price' field is present in the request
+        if ($request->has('name')) {
+            $existingProduct->name = $request->input('name');
+            $existingProduct->save();
+        }
+        if ($request->has('description')) {
+            $existingProduct->description = $request->input('description');
+            $existingProduct->save();
+        }
+        if ($request->has('category')) {
+            $existingProduct->category = $request->input('category');
+            $existingProduct->save();
+        }
+        if ($request->has('quantity')) {
+            $existingProduct->quantity = $request->input('quantity');
+            $existingProduct->save();
+        }
+        if ($request->has('price')) {
+            $existingProduct->price = $request->input('price');
+            $existingProduct->save();
+        }
+
+        return new ProductResource($existingProduct);
     }
+
+    // Handle the case where the product does not exist
+    // You may return an error response or handle it based on your specific needs
+}
+
+    
+
 
     public function destroy(ProductModel $product)
     {

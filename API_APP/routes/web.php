@@ -14,7 +14,11 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/docs', function () {
-    return view('index');
+    return view('docs.index');
+});
+
+Route::get('/test_report', function () {
+    return view('reports.newman');
 });
 
 
