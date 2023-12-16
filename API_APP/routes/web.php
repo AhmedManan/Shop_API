@@ -17,8 +17,8 @@ Route::get('/docs', function () {
     return view('docs.index');
 });
 
-Route::get('/test_report', function () {
-    return view('reports.newman');
+Route::get('/report', function () {
+    return view('reports.report');
 });
 
 

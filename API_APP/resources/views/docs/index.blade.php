@@ -170,9 +170,9 @@
             </div>
         </div>
         <!-- Authentication section -->
-        @include('auth')
+        @include('docs/auth')
         <!-- Product section -->
-        @include('product')
+        @include('docs/product')
     </div>
 
     <!-- JavaScript function to copy content to clipboard -->
